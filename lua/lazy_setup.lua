@@ -9,7 +9,6 @@ require("lazy").setup({
       icons_enabled = true, -- Set to false to disable icons (if no Nerd Font is available)
       pin_plugins = nil, -- Default will pin plugins when tracking `version` of AstroNvim, set to true/false to override
       update_notifications = true, -- Enable/disable notification about running `:Lazy update` twice to update pinned plugins
-      autoformat = false, -- Default is true, is better to avoid commit unrelated lines due to formatting issues
       wrap = true, -- Default is false, enable to wrap lines on a few
     },
   },
@@ -36,6 +35,16 @@ require("lazy").setup({
       },
     },
   },
+  {
+    "nvimtools/none-ls.nvim", 
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      local null_ls = require("null-ls")
+      null_ls.setup({
+        debug = true,
+      })
+    end,
+  },
 } --[[@as LazySpec]], {
   -- Configure any other `lazy.nvim` configuration options here
   install = { colorscheme = { "astrotheme", "habamax" } },
@@ -53,14 +62,6 @@ require("lazy").setup({
     },
   },
 } --[[@as LazyConfig]])
-
--- Auto-disable LSP formatting on save
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    client.server_capabilities.documentFormattingProvider = false
-  end,
-})
 
 -- Enable line wrapping globally
 vim.api.nvim_create_autocmd("BufReadPost", {
