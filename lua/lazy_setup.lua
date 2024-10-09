@@ -45,6 +45,78 @@ require("lazy").setup({
       })
     end,
   },
+  {
+    -- Setup Mason first
+    "williamboman/mason.nvim",
+    config = function()
+      require("mason").setup()
+    end,
+  },
+  {
+    -- Setup Mason-LSPConfig to install required servers
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = { "neovim/nvim-lspconfig" },
+    config = function()
+      require("mason-lspconfig").setup({
+        ensure_installed = {
+          "astro",
+          "html",
+          "cssls",
+          "tailwindcss",
+          "volar",
+          "eslint",
+          "intelephense",
+          "ts_ls",
+        },
+        automatic_installation = true,
+      })
+    end,
+  },
+  {
+    -- Configure the LSP servers after Mason is set up
+    "neovim/nvim-lspconfig",
+    config = function()
+      local lspconfig = require("lspconfig")
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      local on_attach = function(client, bufnr)
+        -- Some  custom on_attach logic here
+      end
+
+      -- List of LSP servers to configure
+      local servers = { 
+	      "astro", 
+	      "html", 
+	      "cssls", 
+	      "tailwindcss", 
+	      "volar", 
+	      "eslint", 
+	      "intelephense", 
+	      "ts_ls" 
+      }
+
+      for _, lsp in ipairs(servers) do
+        lspconfig[lsp].setup({
+          capabilities = capabilities,
+          on_attach = on_attach,
+        })
+      end
+    end,
+  },
+  {
+    -- nvim-treesitter setup
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        ensure_installed = {
+          "astro",
+        },
+        highlight = {
+          enable = true,
+        },
+      })
+    end,
+  },
 } --[[@as LazySpec]], {
   -- Configure any other `lazy.nvim` configuration options here
   install = { colorscheme = { "astrotheme", "habamax" } },
