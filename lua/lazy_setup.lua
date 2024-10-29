@@ -174,3 +174,5 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   command = "set wrap",
 })
 
+-- Disable mouse
+vim.opt.mouse = ""
