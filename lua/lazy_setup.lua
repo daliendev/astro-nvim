@@ -79,6 +79,7 @@ require("lazy").setup({
           "eslint",
           "intelephense",
           "ts_ls",
+					"pyright",
         },
         automatic_installation = true,
       })
@@ -103,7 +104,8 @@ require("lazy").setup({
 	      "volar", 
 	      "eslint", 
 	      "intelephense", 
-	      "ts_ls" 
+	      "ts_ls",
+				"pyright",
       }
 
       for _, lsp in ipairs(servers) do
