@@ -178,3 +178,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 -- Disable mouse
 vim.opt.mouse = ""
+
+-- use system default clipboard
+vim.opt.clipboard = 'unnamedplus'
