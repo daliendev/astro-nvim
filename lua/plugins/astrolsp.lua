@@ -8,7 +8,7 @@ return {
     },
     formatting = {
       format_on_save = {
-        enabled = true,
+        enabled = false,
       },
       timeout_ms = 1000,
     },
@@ -21,15 +21,11 @@ return {
       "eslint",
       "intelephense",
       "ts_ls",
-      "pyright"
+      "pyright",
     },
     config = {
       -- Example: clangd = { capabilities = { offsetEncoding = "utf-8" } },
     },
-    -- Custom on_attach function
-    on_attach = function(client, bufnr)
-    end,
-    -- Add capabilities
     capabilities = require("cmp_nvim_lsp").default_capabilities(),
   },
 }
