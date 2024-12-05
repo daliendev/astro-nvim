@@ -11,6 +11,7 @@ return {
       "tsx",
       "lua",
       "vim",
+      "vue",
       "markdown",
       "markdown_inline",
     },
